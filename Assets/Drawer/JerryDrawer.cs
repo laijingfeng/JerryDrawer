@@ -10,25 +10,25 @@ namespace Jerry
     [ExecuteInEditMode]
     public class JerryDrawer : SingletonMono<JerryDrawer>
     {
-        private static List<Drawer2ElementBase> _drawerList = new List<Drawer2ElementBase>();
-        private List<Drawer2ElementBase> _listToDelete = new List<Drawer2ElementBase>();
+        private static List<DrawerElementBase> _drawerList = new List<DrawerElementBase>();
+        private List<DrawerElementBase> _listToDelete = new List<DrawerElementBase>();
 
         #region 对外接口
 
-        public static T Draw<T>() where T : Drawer2ElementBase
+        public static T Draw<T>() where T : DrawerElementBase
         {
             T ret = (T)Activator.CreateInstance(typeof(T), true);
             Add(ret);
             return ret;
         }
 
-        public static T GetElement<T>(string id) where T : Drawer2ElementBase
+        public static T GetElement<T>(string id) where T : DrawerElementBase
         {
             T ele = _drawerList.Find((x) => id.Equals(x.ID)) as T;
             return ele;
         }
 
-        public static void Remove(Drawer2ElementBase ele)
+        public static void Remove(DrawerElementBase ele)
         {
             if (_drawerList.Contains(ele))
             {
@@ -42,7 +42,7 @@ namespace Jerry
             {
                 return;
             }
-            Drawer2ElementBase ele = _drawerList.Find((x) => id.Equals(x.ID));
+            DrawerElementBase ele = _drawerList.Find((x) => id.Equals(x.ID));
             if (ele != null)
             {
                 _drawerList.Remove(ele);
@@ -56,7 +56,7 @@ namespace Jerry
 
         #endregion 对外接口
 
-        private static void Add(Drawer2ElementBase ele)
+        private static void Add(DrawerElementBase ele)
         {
             if (ele == null)
             {
@@ -93,12 +93,12 @@ namespace Jerry
         }
     }
 
-    public class Drawer2ElementPath : Drawer2ElementBase
+    public class DrawerElementPath : DrawerElementBase
     {
         protected Vector3[] _points;
         protected Transform[] _tfPoints;
         
-        public Drawer2ElementPath()
+        public DrawerElementPath()
             : base()
         {
             _points = null;
@@ -107,21 +107,21 @@ namespace Jerry
 
         #region 对外接口
 
-        public virtual Drawer2ElementPath SetPoints(params Transform[] tfPoints)
+        public virtual DrawerElementPath SetPoints(params Transform[] tfPoints)
         {
             _tfPoints = tfPoints;
             _useVectorPoint = false;
             return this;
         }
 
-        public virtual Drawer2ElementPath SetPoints(params Vector3[] points)
+        public virtual DrawerElementPath SetPoints(params Vector3[] points)
         {
             _points = points;
             _useVectorPoint = true;
             return this;
         }
 
-        public virtual Drawer2ElementPath SetAddPoints(params Vector3[] points)
+        public virtual DrawerElementPath SetAddPoints(params Vector3[] points)
         {
             if (_points == null)
             {
@@ -138,24 +138,24 @@ namespace Jerry
             return this;
         }
 
-        public virtual new Drawer2ElementPath SetID(string id)
+        public virtual new DrawerElementPath SetID(string id)
         {
-            return base.SetID(id) as Drawer2ElementPath;
+            return base.SetID(id) as DrawerElementPath;
         }
 
-        public virtual new Drawer2ElementPath SetColor(Color col)
+        public virtual new DrawerElementPath SetColor(Color col)
         {
-            return base.SetColor(col) as Drawer2ElementPath;
+            return base.SetColor(col) as DrawerElementPath;
         }
 
-        public virtual new Drawer2ElementPath SetLife(float time)
+        public virtual new DrawerElementPath SetLife(float time)
         {
-            return base.SetLife(time) as Drawer2ElementPath;
+            return base.SetLife(time) as DrawerElementPath;
         }
 
-        public virtual new Drawer2ElementPath SetExecuteInEditMode(bool executeInEditMode)
+        public virtual new DrawerElementPath SetExecuteInEditMode(bool executeInEditMode)
         {
-            return base.SetExecuteInEditMode(executeInEditMode) as Drawer2ElementPath;
+            return base.SetExecuteInEditMode(executeInEditMode) as DrawerElementPath;
         }
 
         #endregion 对外接口
@@ -197,7 +197,7 @@ namespace Jerry
         }
     }
 
-    public class Drawer2ElementCube : Drawer2ElementBase
+    public class DrawerElementCube : DrawerElementBase
     {
         protected Transform _tfPos;
         protected Vector3 _pos;
@@ -205,7 +205,7 @@ namespace Jerry
         protected float _sizeFactor;
         protected bool _wire;
 
-        public Drawer2ElementCube()
+        public DrawerElementCube()
             : base()
         {
             _tfPos = null;
@@ -217,56 +217,56 @@ namespace Jerry
 
         #region 对外接口
 
-        public virtual Drawer2ElementCube SetPos(Transform tfPos)
+        public virtual DrawerElementCube SetPos(Transform tfPos)
         {
             _tfPos = tfPos;
             _useVectorPoint = false;
             return this;
         }
 
-        public virtual Drawer2ElementCube SetPos(Vector3 pos)
+        public virtual DrawerElementCube SetPos(Vector3 pos)
         {
             _pos = pos;
             _useVectorPoint = true;
             return this;
         }
 
-        public virtual Drawer2ElementCube SetWire(bool wire)
+        public virtual DrawerElementCube SetWire(bool wire)
         {
             _wire = wire;
             return this;
         }
 
-        public virtual Drawer2ElementCube SetSize(Vector3 size)
+        public virtual DrawerElementCube SetSize(Vector3 size)
         {
             _size = size;
             return this;
         }
 
-        public virtual Drawer2ElementCube SetSizeFactor(float sizeFactor)
+        public virtual DrawerElementCube SetSizeFactor(float sizeFactor)
         {
             _sizeFactor = sizeFactor;
             return this;
         }
 
-        public virtual new Drawer2ElementCube SetID(string id)
+        public virtual new DrawerElementCube SetID(string id)
         {
-            return base.SetID(id) as Drawer2ElementCube;
+            return base.SetID(id) as DrawerElementCube;
         }
 
-        public virtual new Drawer2ElementCube SetColor(Color col)
+        public virtual new DrawerElementCube SetColor(Color col)
         {
-            return base.SetColor(col) as Drawer2ElementCube;
+            return base.SetColor(col) as DrawerElementCube;
         }
 
-        public virtual new Drawer2ElementCube SetLife(float time)
+        public virtual new DrawerElementCube SetLife(float time)
         {
-            return base.SetLife(time) as Drawer2ElementCube;
+            return base.SetLife(time) as DrawerElementCube;
         }
 
-        public virtual new Drawer2ElementCube SetExecuteInEditMode(bool executeInEditMode)
+        public virtual new DrawerElementCube SetExecuteInEditMode(bool executeInEditMode)
         {
-            return base.SetExecuteInEditMode(executeInEditMode) as Drawer2ElementCube;
+            return base.SetExecuteInEditMode(executeInEditMode) as DrawerElementCube;
         }
 
         #endregion 对外接口
@@ -309,13 +309,13 @@ namespace Jerry
         }
     }
 
-    public class Drawer2ElementLabel : Drawer2ElementBase
+    public class DrawerElementLabel : DrawerElementBase
     {
         protected Transform _tfPos;
         protected Vector3 _pos;
         protected string _text;
 
-        public Drawer2ElementLabel()
+        public DrawerElementLabel()
             : base()
         {
             _pos = Vector3.zero;
@@ -324,44 +324,44 @@ namespace Jerry
 
         #region 对外接口
 
-        public virtual Drawer2ElementLabel SetPos(Transform tfPos)
+        public virtual DrawerElementLabel SetPos(Transform tfPos)
         {
             _tfPos = tfPos;
             _useVectorPoint = false;
             return this;
         }
 
-        public virtual Drawer2ElementLabel SetPos(Vector3 pos)
+        public virtual DrawerElementLabel SetPos(Vector3 pos)
         {
             _pos = pos;
             _useVectorPoint = true;
             return this;
         }
 
-        public virtual Drawer2ElementLabel SetText(string text)
+        public virtual DrawerElementLabel SetText(string text)
         {
             _text = text;
             return this;
         }
 
-        public virtual new Drawer2ElementLabel SetID(string id)
+        public virtual new DrawerElementLabel SetID(string id)
         {
-            return base.SetID(id) as Drawer2ElementLabel;
+            return base.SetID(id) as DrawerElementLabel;
         }
 
-        public virtual new Drawer2ElementLabel SetColor(Color col)
+        public virtual new DrawerElementLabel SetColor(Color col)
         {
-            return base.SetColor(col) as Drawer2ElementLabel;
+            return base.SetColor(col) as DrawerElementLabel;
         }
 
-        public virtual new Drawer2ElementLabel SetLife(float time)
+        public virtual new DrawerElementLabel SetLife(float time)
         {
-            return base.SetLife(time) as Drawer2ElementLabel;
+            return base.SetLife(time) as DrawerElementLabel;
         }
 
-        public virtual new Drawer2ElementLabel SetExecuteInEditMode(bool executeInEditMode)
+        public virtual new DrawerElementLabel SetExecuteInEditMode(bool executeInEditMode)
         {
-            return base.SetExecuteInEditMode(executeInEditMode) as Drawer2ElementLabel;
+            return base.SetExecuteInEditMode(executeInEditMode) as DrawerElementLabel;
         }
 
         #endregion 对外接口
@@ -390,7 +390,7 @@ namespace Jerry
         }
     }
 
-    public class Drawer2ElementBase
+    public abstract class DrawerElementBase
     {
         /// <summary>
         /// id
@@ -419,7 +419,7 @@ namespace Jerry
         /// </summary>
         protected bool _useVectorPoint;
 
-        public Drawer2ElementBase()
+        public DrawerElementBase()
         {
             _id = string.Empty;
             _life = 0f;
@@ -452,26 +452,26 @@ namespace Jerry
         /// </summary>
         /// <param name="executeInEditMode"></param>
         /// <returns></returns>
-        public virtual Drawer2ElementBase SetExecuteInEditMode(bool executeInEditMode)
+        public virtual DrawerElementBase SetExecuteInEditMode(bool executeInEditMode)
         {
             _executeInEditMode = executeInEditMode;
             return this;
         }
 
-        public virtual Drawer2ElementBase SetID(string id)
+        public virtual DrawerElementBase SetID(string id)
         {
             _id = id;
             return this;
         }
 
-        public virtual Drawer2ElementBase SetLife(float time)
+        public virtual DrawerElementBase SetLife(float time)
         {
             _createTime = Time.realtimeSinceStartup;
             _life = time;
             return this;
         }
 
-        public virtual Drawer2ElementBase SetColor(Color col)
+        public virtual DrawerElementBase SetColor(Color col)
         {
             _color = col;
             return this;
