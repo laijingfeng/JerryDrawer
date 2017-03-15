@@ -31,8 +31,4 @@ public class DrawerTest : MonoBehaviour
             .SetColor(Color.green)
             .SetExecuteInEditMode(false);
     }
-
-    void Update()
-    {
-    }
 }
