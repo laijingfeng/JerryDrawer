@@ -25,14 +25,14 @@ namespace Jerry
         public Color _color;
 
         /// <summary>
-        /// 是否支持编辑器运行
+        /// 是否支持编辑模式运行
         /// </summary>
         public bool _executeInEditMode;
 
         /// <summary>
-        /// 点使用Vector而不是Transform
+        /// 选中才绘制
         /// </summary>
-        public bool _useVectorPoint;
+        public bool _onlyDrawSelected;
 
         public DrawerElementBase()
         {
@@ -40,7 +40,7 @@ namespace Jerry
             _life = 0f;
             _color = Color.white;
             _executeInEditMode = false;
-            _useVectorPoint = true;
+            _onlyDrawSelected = false;
         }
 
         void Awake()
@@ -57,7 +57,15 @@ namespace Jerry
 
         void OnDrawGizmos()
         {
-            if (Live())
+            if (!_onlyDrawSelected)
+            {
+                Draw();
+            }
+        }
+
+        void OnDrawGizmosSelected()
+        {
+            if (_onlyDrawSelected)
             {
                 Draw();
             }
@@ -73,14 +81,6 @@ namespace Jerry
             }
         }
 
-        public bool IsExecuteInEditMode
-        {
-            get
-            {
-                return _executeInEditMode;
-            }
-        }
-
         /// <summary>
         /// 编辑器模式可用
         /// </summary>
@@ -89,6 +89,12 @@ namespace Jerry
         public virtual DrawerElementBase SetExecuteInEditMode(bool executeInEditMode)
         {
             _executeInEditMode = executeInEditMode;
+            return this;
+        }
+
+        public virtual DrawerElementBase SetOnlyDrawSelected(bool onlyDrawSelected)
+        {
+            _onlyDrawSelected = onlyDrawSelected;
             return this;
         }
 
@@ -136,7 +142,7 @@ namespace Jerry
             {
                 return false;
             }
-            if (IsExecuteInEditMode == false
+            if (_executeInEditMode == false
                 && Application.isPlaying == false)
             {
                 return false;

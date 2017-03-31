@@ -7,12 +7,17 @@ namespace Jerry
     {
         public Vector3[] _points;
         public Transform[] _tfPoints;
+        /// <summary>
+        /// 点使用Vector而不是Transform
+        /// </summary>
+        public bool _useVectorPoint;
 
         public DrawerElementPath()
             : base()
         {
             _points = null;
             _tfPoints = null;
+            _useVectorPoint = true;
         }
 
         #region 对外接口
@@ -66,6 +71,11 @@ namespace Jerry
         public virtual new DrawerElementPath SetExecuteInEditMode(bool executeInEditMode)
         {
             return base.SetExecuteInEditMode(executeInEditMode) as DrawerElementPath;
+        }
+
+        public virtual new DrawerElementPath SetOnlyDrawSelected(bool onlyDrawSelected)
+        {
+            return base.SetExecuteInEditMode(onlyDrawSelected) as DrawerElementPath;
         }
 
         #endregion 对外接口

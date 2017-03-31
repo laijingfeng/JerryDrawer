@@ -9,6 +9,10 @@ namespace Jerry
         public Vector3 _size;
         public float _sizeFactor;
         public bool _wire;
+        /// <summary>
+        /// 点使用Vector而不是Transform
+        /// </summary>
+        public bool _useVectorPoint;
 
         public DrawerElementCube()
             : base()
@@ -18,6 +22,7 @@ namespace Jerry
             _sizeFactor = 1f;
             _wire = false;
             _size = Vector3.one;
+            _useVectorPoint = true;
         }
 
         #region 对外接口
@@ -72,6 +77,11 @@ namespace Jerry
         public virtual new DrawerElementCube SetExecuteInEditMode(bool executeInEditMode)
         {
             return base.SetExecuteInEditMode(executeInEditMode) as DrawerElementCube;
+        }
+
+        public virtual new DrawerElementCube SetOnlyDrawSelected(bool onlyDrawSelected)
+        {
+            return base.SetExecuteInEditMode(onlyDrawSelected) as DrawerElementCube;
         }
 
         #endregion 对外接口

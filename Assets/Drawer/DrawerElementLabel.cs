@@ -5,17 +5,25 @@ using UnityEditor;
 
 namespace Jerry
 {
+    /// <summary>
+    /// 注意：该组件DLL无效
+    /// </summary>
     public class DrawerElementLabel : DrawerElementBase
     {
         public Transform _tfPos;
         public Vector3 _pos;
         public string _text;
+        /// <summary>
+        /// 点使用Vector而不是Transform
+        /// </summary>
+        public bool _useVectorPoint;
 
         public DrawerElementLabel()
             : base()
         {
             _pos = Vector3.zero;
             _text = string.Empty;
+            _useVectorPoint = true;
         }
 
         #region 对外接口
@@ -34,6 +42,11 @@ namespace Jerry
             return this;
         }
 
+        /// <summary>
+        /// 注意：该组件DLL无效
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
         public virtual DrawerElementLabel SetText(string text)
         {
             _text = text;
@@ -58,6 +71,11 @@ namespace Jerry
         public virtual new DrawerElementLabel SetExecuteInEditMode(bool executeInEditMode)
         {
             return base.SetExecuteInEditMode(executeInEditMode) as DrawerElementLabel;
+        }
+
+        public virtual new DrawerElementLabel SetOnlyDrawSelected(bool onlyDrawSelected)
+        {
+            return base.SetExecuteInEditMode(onlyDrawSelected) as DrawerElementLabel;
         }
 
         #endregion 对外接口
