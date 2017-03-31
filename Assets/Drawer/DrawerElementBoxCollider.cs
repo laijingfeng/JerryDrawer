@@ -85,7 +85,15 @@ namespace Jerry
                 return;
             }
 
-            BoxCollider col = _target.GetComponent<BoxCollider>();
+            BoxCollider col = null;
+            if (_target != null)
+            {
+                col = _target.GetComponent<BoxCollider>();
+            }
+            else
+            {
+                col = this.transform.GetComponent<BoxCollider>();
+            }
             if (col == null)
             {
                 return;

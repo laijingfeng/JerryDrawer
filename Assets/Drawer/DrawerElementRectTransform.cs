@@ -59,7 +59,16 @@ namespace Jerry
 
             Gizmos.color = _color;
 
-            RectTransform rect = this.transform as RectTransform;
+            RectTransform rect = null;
+            if (_target != null)
+            {
+                rect = _target as RectTransform;
+            }
+            else
+            {
+                rect = this.transform as RectTransform;
+            }
+
             if (rect == null)
             {
                 return false;
