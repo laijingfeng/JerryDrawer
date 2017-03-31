@@ -16,7 +16,7 @@ namespace Jerry
         /// <summary>
         /// 点使用Vector而不是Transform
         /// </summary>
-        public bool _useVectorPoint;
+        private bool _useVectorPoint;
 
         public DrawerElementLabel()
             : base()
