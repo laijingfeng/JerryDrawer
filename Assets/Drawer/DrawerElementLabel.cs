@@ -5,9 +5,6 @@ using UnityEditor;
 
 namespace Jerry
 {
-    /// <summary>
-    /// 注意：该组件DLL无效
-    /// </summary>
     public class DrawerElementLabel : DrawerElementBase
     {
         public Transform _tfPos;
@@ -16,14 +13,14 @@ namespace Jerry
         /// <summary>
         /// 点使用Vector而不是Transform
         /// </summary>
-        private bool _useVectorPoint;
+        public bool _useVectorPoint;
 
         public DrawerElementLabel()
             : base()
         {
             _pos = Vector3.zero;
             _text = string.Empty;
-            _useVectorPoint = true;
+            _useVectorPoint = false;
         }
 
         #region 对外接口
@@ -42,11 +39,6 @@ namespace Jerry
             return this;
         }
 
-        /// <summary>
-        /// 注意：该组件DLL无效
-        /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
         public virtual DrawerElementLabel SetText(string text)
         {
             _text = text;
@@ -89,13 +81,18 @@ namespace Jerry
 
             GUI.color = _color;
 #if UNITY_EDITOR
+            string realText = _text;
+            if (string.IsNullOrEmpty(_text))
+            {
+                realText = this.transform.name;
+            }
             if (_useVectorPoint == false && _tfPos != null)
             {
-                Handles.Label(_tfPos.position, _text);
+                Handles.Label(_tfPos.position, realText);
             }
             else
             {
-                Handles.Label(_pos, _text);
+                Handles.Label(_pos, realText);
             }
 #endif
             GUI.color = Color.white;

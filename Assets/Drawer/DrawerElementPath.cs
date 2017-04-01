@@ -10,14 +10,14 @@ namespace Jerry
         /// <summary>
         /// 点使用Vector而不是Transform
         /// </summary>
-        private bool _useVectorPoint;
+        public bool _useVectorPoint;
 
         public DrawerElementPath()
             : base()
         {
             _points = null;
             _tfPoints = null;
-            _useVectorPoint = true;
+            _useVectorPoint = false;
         }
 
         #region 对外接口

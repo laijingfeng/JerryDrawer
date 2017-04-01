@@ -12,7 +12,7 @@ namespace Jerry
         /// <summary>
         /// 点使用Vector而不是Transform
         /// </summary>
-        private bool _useVectorPoint;
+        public bool _useVectorPoint;
 
         public DrawerElementCube()
             : base()
@@ -22,7 +22,7 @@ namespace Jerry
             _sizeFactor = 1f;
             _wire = false;
             _size = Vector3.one;
-            _useVectorPoint = true;
+            _useVectorPoint = false;
         }
 
         #region 对外接口
