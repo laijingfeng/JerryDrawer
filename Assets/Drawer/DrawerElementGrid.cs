@@ -14,14 +14,26 @@ namespace Jerry
         public Vector3 _minPos;
 
         /// <summary>
-        /// 大小
+        /// 尺寸大小，几个格子大小，整数
         /// </summary>
-        public Vector3 _size;
+        public Vector2 _size;
 
         /// <summary>
         /// 格子大小
         /// </summary>
-        public Vector3 _gridSize;
+        public Vector2 _gridSize;
+
+        public PlaneType _plane;
+
+        /// <summary>
+        /// 平面类型
+        /// </summary>
+        public enum PlaneType
+        {
+            XY = 0,
+            XZ,
+            ZY,
+        }
 
         public DrawerElementGrid()
             : base()
@@ -29,6 +41,7 @@ namespace Jerry
             _minPos = Vector3.zero;
             _gridSize = Vector3.zero;
             _size = Vector3.zero;
+            _plane = PlaneType.XY;
         }
 
         #region 对外接口
@@ -39,15 +52,21 @@ namespace Jerry
             return this;
         }
 
-        public DrawerElementGrid SetSize(Vector3 size)
+        public DrawerElementGrid SetSize(Vector2 size)
         {
             _size = size;
             return this;
         }
 
-        public DrawerElementGrid SetGridSize(Vector3 gridSize)
+        public DrawerElementGrid SetGridSize(Vector2 gridSize)
         {
             _gridSize = gridSize;
+            return this;
+        }
+
+        public DrawerElementGrid SetPlaneType(PlaneType plane)
+        {
+            _plane = plane;
             return this;
         }
 
@@ -87,57 +106,47 @@ namespace Jerry
 
             Gizmos.color = _color;
 
-            if (_size.x > 0 && _size.y > 0)
+            for (int i = 0; i <= _size.x; i++)
             {
-                for (int i = 0; i <= _size.x; i++)
-                {
-                    //竖线
-                    Gizmos.DrawLine(_minPos + new Vector3(i * _gridSize.x, 0, 0),
-                        _minPos + new Vector3(i * _gridSize.x, _size.y * _gridSize.y, 0));
-                }
-
-                for (int i = 0; i <= _size.y; i++)
-                {
-                    //横线
-                    Gizmos.DrawLine(_minPos + new Vector3(0, i * _gridSize.y, 0),
-                        _minPos + new Vector3(_size.x * _gridSize.x, i * _gridSize.y, 0));
-                }
+                //竖线
+                Gizmos.DrawLine(XY2PlaneXYZ(new Vector2(i * _gridSize.x, 0)),
+                    XY2PlaneXYZ(new Vector2(i * _gridSize.x, _size.y * _gridSize.y)));
             }
-            else if (_size.x > 0 && _size.z > 0)
+
+            for (int i = 0; i <= _size.y; i++)
             {
-                for (int i = 0; i <= _size.x; i++)
-                {
-                    //竖线
-                    Gizmos.DrawLine(_minPos + new Vector3(i * _gridSize.x, 0, 0),
-                        _minPos + new Vector3(i * _gridSize.x, 0, _size.z * _gridSize.z));
-                }
-
-                for (int i = 0; i <= _size.z; i++)
-                {
-                    //横线
-                    Gizmos.DrawLine(_minPos + new Vector3(0, 0, i * _gridSize.z),
-                        _minPos + new Vector3(_size.x * _gridSize.x, 0, i * _gridSize.z));
-                }
+                //横线
+                Gizmos.DrawLine(XY2PlaneXYZ(new Vector2(0, i * _gridSize.y)),
+                    XY2PlaneXYZ(new Vector2(_size.x * _gridSize.x, i * _gridSize.y)));
             }
-            else if (_size.z > 0 && _size.y > 0)
-            {
-                for (int i = 0; i <= _size.z; i++)
-                {
-                    //竖线
-                    Gizmos.DrawLine(_minPos + new Vector3(0, 0, i * _gridSize.z),
-                        _minPos + new Vector3(0, _size.y * _gridSize.y, i * _gridSize.z));
-                }
 
-                for (int i = 0; i <= _size.y; i++)
-                {
-                    //横线
-                    Gizmos.DrawLine(_minPos + new Vector3(0, i * _gridSize.y, 0),
-                        _minPos + new Vector3(0, i * _gridSize.y, _size.z * _gridSize.z));
-                }
-            }
-            
             Gizmos.color = Color.white;
             return true;
+        }
+
+        private Vector3 XY2PlaneXYZ(Vector3 pos)
+        {
+            switch (_plane)
+            {
+                case PlaneType.XY:
+                    {
+                        //no change
+                    }
+                    break;
+                case PlaneType.XZ:
+                    {
+                        pos.z = pos.y;
+                        pos.y = 0;
+                    }
+                    break;
+                case PlaneType.ZY:
+                    {
+                        pos.z = pos.x;
+                        pos.x = 0;
+                    }
+                    break;
+            }
+            return _minPos + pos;
         }
     }
 }
