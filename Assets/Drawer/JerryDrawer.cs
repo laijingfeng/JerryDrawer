@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Jerry
 {
@@ -8,7 +8,7 @@ namespace Jerry
         private static List<DrawerElementBase> _drawerList = new List<DrawerElementBase>();
         private List<DrawerElementBase> _listToDelete = new List<DrawerElementBase>();
 
-        public override void Awake()
+        protected override void Awake()
         {
             base.Awake();
             _drawerList.Clear();
