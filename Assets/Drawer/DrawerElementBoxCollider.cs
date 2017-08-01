@@ -1,13 +1,13 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Jerry
 {
     public class DrawerElementBoxCollider : DrawerElementBase
     {
-        public Transform _target;
+        public BoxCollider _target;
         public DrawType _drawType;
-        
+
         public enum DrawType
         {
             None = 0,
@@ -25,7 +25,7 @@ namespace Jerry
 
         #region 对外接口
 
-        public virtual DrawerElementBoxCollider SetTarget(Transform target)
+        public virtual DrawerElementBoxCollider SetTarget(BoxCollider target)
         {
             _target = target;
             return this;
@@ -80,27 +80,17 @@ namespace Jerry
 
         private void DoDraw()
         {
-            if (_target == null)
+            if (_target == null
+                || _target.transform == null)
             {
                 return;
             }
 
-            BoxCollider col = null;
-            if (_target != null)
-            {
-                col = _target.GetComponent<BoxCollider>();
-            }
-            else
-            {
-                col = this.transform.GetComponent<BoxCollider>();
-            }
-            if (col == null)
-            {
-                return;
-            }
-
-            Vector3 s = col.transform.lossyScale;
-            Vector3 p = col.transform.position;
+            Vector3 s = _target.transform.lossyScale;
+            s.x *= _target.size.x;
+            s.y *= _target.size.y;
+            s.z *= _target.size.z;
+            Vector3 p = _target.transform.position + _target.center;
 
             List<Vector3> posOnBox = new List<Vector3>();
             Vector3 one = Vector3.zero;
@@ -110,7 +100,10 @@ namespace Jerry
                 {
                     for (int k = 0; k < 2; k++)
                     {
-                        one = p + col.transform.up.normalized * s.y * 0.5f * (1 - 2 * i) + col.transform.right.normalized * s.x * 0.5f * (1 - 2 * j) + col.transform.forward.normalized * s.z * 0.5f * (1 - 2 * k);
+                        one = p
+                            + _target.transform.up.normalized * s.y * 0.5f * (1 - 2 * i)
+                            + _target.transform.right.normalized * s.x * 0.5f * (1 - 2 * j)
+                            + _target.transform.forward.normalized * s.z * 0.5f * (1 - 2 * k);
                         posOnBox.Add(one);
                     }
                 }

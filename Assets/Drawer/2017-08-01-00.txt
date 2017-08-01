@@ -1,0 +1,8 @@
+依赖：
+- Singleton.dll
+
+2017-08-01
+- 修复DrawerElementBoxCollider对BoxCollider.size和BoxCollider.center不支持
+- DrawerElementBoxCollider的target由Transform改为BoxCollider，一个Transform下有多个BoxCollider时可以选择性绘制
+2017-07-31
+ - 更新依赖库Singleton.dll，做相应调整
