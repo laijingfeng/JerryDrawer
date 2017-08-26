@@ -4,7 +4,7 @@
 目录 | Github/项目
 标签 | Github、JerryDrawer
 备注 | [Github](https://github.com/laijingfeng/JerryDrawer)
-更新 | 2017-06-19 00:08:21
+更新 | 2017-08-26 20:15:44
 
 [TOC]
 
@@ -12,7 +12,7 @@
 
 编辑器工具，快速绘制基本的辅助图，使用的Gizmos和Handles，依赖`Singleton.dll`。
 
-Game视图要看见的话，点亮Gizmos。
+Game视图要看见的话，确认点亮Gizmos。
 
 # 对外接口
 
@@ -32,6 +32,8 @@ JerryDrawer.Draw<DrawerElementPath>()
     .SetColor(Color.yellow)
     .SetExecuteInEditMode(true);
 ```
+
+绘制类型T也能挂载在对象上设置对应属性单用
 
 # 支持的类型
 
@@ -71,3 +73,15 @@ JerryDrawer.Draw<DrawerElementPath>()
         - `SetGridSize` 设置格子大小
         - `SetSize` 设置大小，xy占几个格子，整数
         - `SetPlaneType` 设置平面类型
+        - `SetCoordinateType` 设置坐标系
+
+# 更新日志
+
+## 2017-08-26
+
+- DrawerElementGrid支持本地坐标系和全局坐标系
+
+## 2017-08-01
+
+- 修复DrawerElementBoxCollider对BoxCollider.size和BoxCollider.center不支持
+- DrawerElementBoxCollider的target由Transform改为BoxCollider，一个Transform下有多个BoxCollider时可以选择性绘制

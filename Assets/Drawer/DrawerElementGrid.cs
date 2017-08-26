@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 namespace Jerry
 {
@@ -9,7 +8,7 @@ namespace Jerry
     public class DrawerElementGrid : DrawerElementBase
     {
         /// <summary>
-        /// 左下角位置
+        /// 左下角位置，只有Global的时候有效
         /// </summary>
         public Vector3 _minPos;
 
@@ -24,6 +23,13 @@ namespace Jerry
         public Vector2 _gridSize;
 
         public PlaneType _plane;
+        public CoordinateType _coordinate;
+
+        public enum CoordinateType
+        {
+            Global = 0,
+            Local,
+        }
 
         /// <summary>
         /// 平面类型
@@ -42,6 +48,7 @@ namespace Jerry
             _gridSize = Vector3.zero;
             _size = Vector3.zero;
             _plane = PlaneType.XY;
+            _coordinate = CoordinateType.Global;
         }
 
         #region 对外接口
@@ -67,6 +74,12 @@ namespace Jerry
         public DrawerElementGrid SetPlaneType(PlaneType plane)
         {
             _plane = plane;
+            return this;
+        }
+
+        public DrawerElementGrid SetCoordinateType(CoordinateType coordinate)
+        {
+            _coordinate = coordinate;
             return this;
         }
 
@@ -145,6 +158,13 @@ namespace Jerry
                         pos.x = 0;
                     }
                     break;
+            }
+            if (_coordinate == CoordinateType.Local)
+            {
+                return this.transform.localPosition
+                    + this.transform.right * pos.x
+                    + this.transform.up * pos.y
+                    + this.transform.forward * pos.z;
             }
             return _minPos + pos;
         }
