@@ -53,11 +53,6 @@ namespace Jerry
             return this;
         }
 
-        public virtual new DrawerElementPath SetID(string id)
-        {
-            return base.SetID(id) as DrawerElementPath;
-        }
-
         public virtual new DrawerElementPath SetColor(Color col)
         {
             return base.SetColor(col) as DrawerElementPath;

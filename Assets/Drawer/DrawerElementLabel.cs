@@ -45,11 +45,6 @@ namespace Jerry
             return this;
         }
 
-        public virtual new DrawerElementLabel SetID(string id)
-        {
-            return base.SetID(id) as DrawerElementLabel;
-        }
-
         public virtual new DrawerElementLabel SetColor(Color col)
         {
             return base.SetColor(col) as DrawerElementLabel;

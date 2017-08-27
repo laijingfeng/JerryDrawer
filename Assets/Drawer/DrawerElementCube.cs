@@ -59,11 +59,6 @@ namespace Jerry
             return this;
         }
 
-        public virtual new DrawerElementCube SetID(string id)
-        {
-            return base.SetID(id) as DrawerElementCube;
-        }
-
         public virtual new DrawerElementCube SetColor(Color col)
         {
             return base.SetColor(col) as DrawerElementCube;

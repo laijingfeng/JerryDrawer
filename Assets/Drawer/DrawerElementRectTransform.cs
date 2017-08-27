@@ -23,11 +23,6 @@ namespace Jerry
             return this;
         }
 
-        public virtual new DrawerElementRectTransform SetID(string id)
-        {
-            return base.SetID(id) as DrawerElementRectTransform;
-        }
-
         public virtual new DrawerElementRectTransform SetColor(Color col)
         {
             return base.SetColor(col) as DrawerElementRectTransform;

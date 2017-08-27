@@ -98,10 +98,9 @@ namespace Jerry
             return this;
         }
 
-        public virtual DrawerElementBase SetID(string id)
+        public void SetID(string id)
         {
             _id = id;
-            return this;
         }
 
         public virtual DrawerElementBase SetLife(float time)

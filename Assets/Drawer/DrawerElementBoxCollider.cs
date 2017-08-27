@@ -37,11 +37,6 @@ namespace Jerry
             return this;
         }
 
-        public virtual new DrawerElementBoxCollider SetID(string id)
-        {
-            return base.SetID(id) as DrawerElementBoxCollider;
-        }
-
         public virtual new DrawerElementBoxCollider SetColor(Color col)
         {
             return base.SetColor(col) as DrawerElementBoxCollider;

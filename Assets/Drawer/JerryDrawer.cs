@@ -42,18 +42,25 @@ namespace Jerry
 
         #region 对外接口
 
-        public static T Draw<T>() where T : DrawerElementBase
+        public static T Draw<T>(string id = "") where T : DrawerElementBase
         {
-            GameObject go = new GameObject(typeof(T).ToString());
-            go.transform.SetParent(Inst.transform);
-            T ret = go.AddComponent<T>();
-            go.transform.position = Vector3.zero;
-            go.transform.localEulerAngles = Vector3.zero;
-            go.transform.localScale = Vector3.one;
+            T ret = null;
+            if (!string.IsNullOrEmpty(id))
+            {
+                ret = GetElement<T>(id);
+            }
 
-            Remove(ret);
-            _drawerList.Add(ret);
-
+            if (ret == null)
+            {
+                GameObject go = new GameObject(typeof(T).ToString());
+                go.transform.SetParent(Inst.transform);
+                ret = go.AddComponent<T>();
+                ret.SetID(id);
+                go.transform.position = Vector3.zero;
+                go.transform.localEulerAngles = Vector3.zero;
+                go.transform.localScale = Vector3.one;
+                _drawerList.Add(ret);
+            }
             return ret;
         }
 

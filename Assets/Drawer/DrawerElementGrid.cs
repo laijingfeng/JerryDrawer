@@ -83,11 +83,6 @@ namespace Jerry
             return this;
         }
 
-        public virtual new DrawerElementGrid SetID(string id)
-        {
-            return base.SetID(id) as DrawerElementGrid;
-        }
-
         public virtual new DrawerElementGrid SetColor(Color col)
         {
             return base.SetColor(col) as DrawerElementGrid;

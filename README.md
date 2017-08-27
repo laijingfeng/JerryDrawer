@@ -4,7 +4,7 @@
 目录 | Github/项目
 标签 | Github、JerryDrawer
 备注 | [Github](https://github.com/laijingfeng/JerryDrawer)
-更新 | 2017-08-26 20:15:44
+更新 | 2017-08-27 16:57:03
 
 [TOC]
 
@@ -48,7 +48,6 @@ JerryDrawer.Draw<DrawerElementPath>()
 
 - `DrawerElementBase`
     - `SetExecuteInEditMode()`
-    - `SetID()`
     - `SetLife()`
     - `SetColor()`
     - `SetOnlyDrawSelected()`
@@ -76,6 +75,10 @@ JerryDrawer.Draw<DrawerElementPath>()
         - `SetCoordinateType` 设置坐标系
 
 # 更新日志
+
+## 2017-08-27
+
+- 修改设置ID的规则，ID在初始化的时候设置，ID相同不创建新的
 
 ## 2017-08-26
 
