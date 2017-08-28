@@ -156,7 +156,7 @@ namespace Jerry
             }
             if (_coordinate == CoordinateType.Local)
             {
-                return this.transform.localPosition
+                return this.transform.position
                     + this.transform.right * pos.x
                     + this.transform.up * pos.y
                     + this.transform.forward * pos.z;
